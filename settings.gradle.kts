@@ -48,9 +48,7 @@ dependencyResolutionManagement {
     }
 }
 
-include(
-    // "adventure", - Moved to https://github.com/DualisGames/adventure-dsl
-    "sponge-api",
-    "exposed",
-    "dependency-injection"
-)
+sequenceOf("api", "exposed", "di").forEach {
+    include(it)
+    project(":$it").name = "${rootProject.name}-$it"
+}
