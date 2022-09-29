@@ -28,3 +28,11 @@ dependencies {
     val compileOnly by configurations
     compileOnly(libs.sponge.api)
 }
+
+configure<PublishingExtension> {
+    publications {
+        create("java", MavenPublication::class) {
+            from(components["java"])
+        }
+    }
+}
