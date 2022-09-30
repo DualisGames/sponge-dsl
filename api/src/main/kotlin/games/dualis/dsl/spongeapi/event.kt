@@ -19,6 +19,7 @@
 package games.dualis.dsl.spongeapi
 
 import io.leangen.geantyref.TypeToken
+import org.spongepowered.api.Sponge
 import org.spongepowered.api.event.Event
 import org.spongepowered.api.event.EventListenerRegistration
 import org.spongepowered.api.event.Order
@@ -36,3 +37,5 @@ inline fun <reified T : Event> PluginContainer.listener(
     .order(order)
     .beforeModifications(beforeModifications)
     .listener { e -> block(e) }
+    .build()
+    .also(Sponge.eventManager()::registerListener)
