@@ -64,21 +64,21 @@ class KCommand(private val command: Command.Builder) : Command.Builder by comman
     }
 
     /**
-     * Registers given [cmd] with [this] [String] as an alias.
+     * Registers this command with given [alias].
      */
-    infix fun String.runs(cmd: Command.Parameterized) = addChild(cmd, this)
+    infix fun Command.Parameterized.handles(alias: String) = addChild(this, alias)
 
     /**
-     * Registers given [cmd] with [this] array of [String] as aliases.
+     * Registers this command with given [aliases].
      */
-    infix fun Array<String>.runs(cmd: Command.Parameterized) =
-        addChild(cmd, this[0], *this.drop(1).toTypedArray())
+    infix fun Command.Parameterized.handles(aliases: Array<String>) = this handles aliases.toList()
 
     /**
      * Registers given [cmd] with [this] list of [String] as aliases.
      */
-    infix fun List<String>.runs(cmd: Command.Parameterized) =
-        addChild(cmd, this[0], *this.drop(1).toTypedArray())
+    infix fun Command.Parameterized.handles(aliases: List<String>) =
+        addChild(this, aliases)
+
 
 }
 

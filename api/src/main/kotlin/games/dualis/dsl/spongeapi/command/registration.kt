@@ -34,21 +34,21 @@ class KCommandRegistration(
 ) {
 
     /**
-     * Registers given [cmd] with [this] [String] as an alias.
+     * Registers this command with given [alias].
      */
-    infix fun String.runs(cmd: Command.Parameterized) = event.register(container, cmd, this)
+    infix fun Command.Parameterized.handles(alias: String) = event.register(container, this, alias)
 
     /**
-     * Registers given [cmd] with [this] array of [String] as aliases.
+     * Registers this command with given [aliases].
      */
-    infix fun Array<String>.runs(cmd: Command.Parameterized) =
-        event.register(container, cmd, this[0], *this.drop(1).toTypedArray())
+    infix fun Command.Parameterized.handles(aliases: Array<String>) =
+        event.register(container, this, aliases[0], *aliases.drop(1).toTypedArray())
 
     /**
-     * Registers given [cmd] with [this] list of [String] as aliases.
+     * Registers this command with given [aliases].
      */
-    infix fun List<String>.runs(cmd: Command.Parameterized) =
-        event.register(container, cmd, this[0], *this.drop(1).toTypedArray())
+    infix fun Command.Parameterized.handles(aliases: List<String>) =
+        event.register(container, this, aliases[0], *aliases.drop(1).toTypedArray())
 
 }
 
